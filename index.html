@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html manifest="snelheid.appcache">
+<head>
+    <title>Snelheid</title> <!-- Snelheid is Dutch for speed. It sounds cool. -->
+    <style>
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            background-color: white;
+            font-family: Arial;
+        }
+
+        div {
+            position: fixed;
+            width: 100%;
+            height: 350px;
+            top: 50%;
+            margin-top: -175px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 30em;
+            margin-top: -110px;
+        }
+
+        #unit {
+            font-size: 50px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body id="body">
+    <script>   
+        function getLocation () {       // Get the user's location
+            if (navigator.geolocation) {
+                navigator.geolocation.watchPosition(calcSpeed);
+            };
+        }
+
+        function calcSpeed (position) {     // With location, calculate speed and update div.
+            var speed = document.getElementById('speed');
+            if (position.coords.speed != null) {
+                speed.innerHTML = Math.round(position.coords.speed * 3.6);
+            } else {
+                speed.innerHTML = '0';
+            };
+        }
+
+        function night () {     // Toggle text and background colour. White on black or black on white.
+            var body = document.getElementById('body');
+
+            if (body.style.backgroundColor == 'black') {
+                body.style.backgroundColor = 'white';
+                body.style.color = 'black';
+            } else {
+                body.style.backgroundColor = 'black';
+                body.style.color = 'white';
+            };            
+        }
+
+        function hud () {       // Creates a mirror image of the speed. This can create a HUD when phone is laid on dashboard.
+            var hud = document.getElementById('hud');
+
+            if (hud.style.webkitTransform == 'scale(-1, 1)') {
+                hud.style.webkitTransform = 'scale(1, 1)';
+            } else {
+                hud.style.webkitTransform = 'scale(-1, 1)';
+            }            
+        }
+
+        getLocation();
+    </script>
+    <div id='hud'>
+        <h1><span id="speed" onclick='night()'>0</span><span id="unit" onclick='hud()'> km/h<span></h1>        
+    </div>    
+</body>
+</html>
