@@ -11,12 +11,13 @@
             font-family: Arial;
         }
 
-        div {
+        #hud {
             position: fixed;
             width: 100%;
             height: 350px;
             top: 50%;
             margin-top: -175px;
+            z-index: -1;
         }
 
         h1 {
@@ -27,7 +28,29 @@
 
         #unit {
             font-size: 50px;
-            opacity: 0.5;
+            opacity: 0.4;
+        }
+
+        #info {
+            z-index: 100;
+            margin-left: 90px;
+            margin-top: 15px;
+        }
+
+        #pushButton {
+            position: fixed;
+            font-weight: bolder;
+            font-size: 70px;
+            top: 0;
+            margin-top: -30px;
+            margin-left: 20px;
+            opacity: 0.1;
+            text-decoration: none;
+        }
+
+        #pushButton:hover, #pushButton:active {
+            opacity: 0.4;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -44,7 +67,7 @@
                 document.getElementById('speed').innerHTML = Math.round(position.coords.speed * 3.6);
                 document.getElementById('accuracy').innerHTML = position.coords.accuracy;
                 document.getElementById('lat').innerHTML = position.coords.latitude;
-                document.getElementById('long').innerHTML = position.coords.longitude;                
+                document.getElementById('long').innerHTML = position.coords.longitude;
                 document.getElementById('alti').innerHTML = position.coords.altitude;
             }, error, options);
         } else {
@@ -76,15 +99,31 @@
                 hud.style.webkitTransform = 'scale(-1, 1)';
             }            
         }
+
+        function toggleInfo () {
+            var infoDiv = document.getElementById('info');
+
+            if (infoDiv.style.visibility == 'hidden') {
+                infoDiv.style.visibility = 'visible';
+            } else {
+                infoDiv.style.visibility = 'hidden';
+            };
+        }
     </script>
-    <p>
-        Accuracy: <span id="accuracy"></span> | 
-        Latitude: <span id='lat'></span> | 
-        Latitude: <span id='long'></span> | 
-        Altitude: <span id='alti'></span> |
-    </p>
+    <div id="pushButton" onclick="toggleInfo()">...</div>
+    <div id="info">
+        <p>
+            Accuracy: <span id="accuracy"></span>m, &nbsp;
+            Latitude: <span id='lat'></span><sup>&#8728;</sup>, &nbsp;
+            Longitude: <span id='long'></span><sup>&#8728;</sup>, &nbsp;
+            Altitude: <span id='alti'></span>m
+        </p>
+    </div>    
     <div id='hud'>
         <h1><span id="speed" onclick='night()'>0</span><span id="unit" onclick='hud()'> km/h<span></h1>        
-    </div>
+    </div>       
+    <script>
+        document.getElementById('info').style.visibility = 'hidden';
+    </script>
 </body>
 </html>
