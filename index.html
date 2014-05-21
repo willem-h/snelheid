@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest="snelheid.appcache">
+<html>
 <head>
     <title>Snelheid</title> <!-- Snelheid is Dutch for speed. It sounds cool. -->
     <style>
@@ -32,20 +32,27 @@
     </style>
 </head>
 <body id="body">
-    <script>   
-        function getLocation () {       // Get the user's location
-            if (navigator.geolocation) {
-                navigator.geolocation.watchPosition(calcSpeed);
-            };
+    <script>
+        var options = {
+            enableHighAccuracy: true,
+            maximumAge        : 15000,
+            timeout           : 10000
         }
 
-        function calcSpeed (position) {     // With location, calculate speed and update div.
-            var speed = document.getElementById('speed');
-            if (position.coords.speed != null) {
-                speed.innerHTML = Math.round(position.coords.speed * 3.6);
-            } else {
-                speed.innerHTML = '0';
-            };
+        if ('geolocation' in navigator) {
+            navigator.geolocation.watchPosition(function(position){
+                document.getElementById('speed').innerHTML = Math.round(position.coords.speed * 3.6);
+                document.getElementById('accuracy').innerHTML = position.coords.accuracy;
+                document.getElementById('lat').innerHTML = position.coords.latitude;
+                document.getElementById('long').innerHTML = position.coords.longitude;                
+                document.getElementById('alti').innerHTML = position.coords.altitude;
+            }, error, options);
+        } else {
+            alert("Geolocation isn't available");
+        }
+
+        function error (error) {
+            alert('ERROR(' + error.code + '): ' + error.message);
         }
 
         function night () {     // Toggle text and background colour. White on black or black on white.
@@ -69,11 +76,15 @@
                 hud.style.webkitTransform = 'scale(-1, 1)';
             }            
         }
-
-        getLocation();
     </script>
+    <p>
+        Accuracy: <span id="accuracy"></span> | 
+        Latitude: <span id='lat'></span> | 
+        Latitude: <span id='long'></span> | 
+        Altitude: <span id='alti'></span> |
+    </p>
     <div id='hud'>
         <h1><span id="speed" onclick='night()'>0</span><span id="unit" onclick='hud()'> km/h<span></h1>        
-    </div>    
+    </div>
 </body>
 </html>
