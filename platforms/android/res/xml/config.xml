@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.willemh.snelheid" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <preference name="loglevel" value="DEBUG" />
+    <preference name="AndroidLaunchMode" value="singleTop" />
+    <feature name="App">
+        <param name="android-package" value="org.apache.cordova.App" />
+    </feature>
+    <name>Snelheid</name>
+    <description>
+        HUD speedometer. Snelheid = Speed (in dutch)
+    </description>
+    <author email="whreck197@live.com" href="http://willemh.webege.com">
+        Willem H
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <icon src="www/img/snelheid.png" />
+    <preference name="Fullscreen" value="true" />
+    <preference name="Orientation" value="landscape" />
+</widget>
