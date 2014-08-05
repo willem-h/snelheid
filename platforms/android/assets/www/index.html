@@ -6,9 +6,10 @@
 
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
-<body id="body">
+<body id="body" onload="onLoad()">
+    <script src="js/cordova.js"></script>
     <script src="js/script.js"></script>
-    <div id="pushButton" onclick="toggleInfo()">...</div>
+    <div id="pushButton" ontouchstart="toggleInfo()">...</div>
     <div id="info">
         <p>
             Accuracy: <span id="accuracy"></span>m, &nbsp;
@@ -18,7 +19,7 @@
         </p>
     </div>
     <div id='hud'>
-        <h1><span id="speed" onclick='night()'>0</span><span id="unit" onclick='carHud()'> km/h<span></h1>
+        <h1><span id="speed" ontouchstart='night()'>0</span><span id="unit" ontouchstart='carHud()'> km/h<span></h1>
     </div>
     <script>
         document.getElementById('info').style.visibility = 'hidden';

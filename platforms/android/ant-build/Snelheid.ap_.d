@@ -37,6 +37,7 @@
 /home/willem/Localhost/snelheid/platforms/android/assets/www/plugins \
 /home/willem/Localhost/snelheid/platforms/android/assets/www/img \
 /home/willem/Localhost/snelheid/platforms/android/assets/www/css/style.css \
+/home/willem/Localhost/snelheid/platforms/android/assets/www/js/cordova.js \
 /home/willem/Localhost/snelheid/platforms/android/assets/www/js/script.js \
 /home/willem/Localhost/snelheid/platforms/android/assets/www/img/snelheid.png \
 /home/willem/Localhost/snelheid/platforms/android/assets/www/img/res \
